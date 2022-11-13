@@ -1,0 +1,79 @@
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: aqua;
+    margin: 0;
+}
+
+main {
+    margin: 8px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#submitButton {
+    background-color: white;
+    color: aqua;
+    border: 1px solid aqua;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+#submitButton:hover {
+    background-color: aqua;
+    color: white;
+    border: 1px solid white;
+}
+/*
+#showPasswordAndText {
+    margin: 10px;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+}*/
+
+#copyPassword {
+    margin-left: 15px;
+    padding: 10px;
+    background-color: blueviolet;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+#copyPassword:hover {
+    background-color: rgb(152, 71, 227);
+}
+
+#createdPassword {
+    background-color: white;
+    color: grey;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    margin-top: 150px;
+    margin-bottom: 0;
+    padding: 20px;
+    background-color: black;
+    color: gray;
+    position: relative;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+footer a {
+    color: darkred;
+}
+
+footer a:hover {
+    text-decoration: none;
+}

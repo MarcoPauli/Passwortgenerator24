@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passwortgenerator</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico"><!--Favicon-->
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.webmanifest">
+</head>
+<body>
+    <main>
+    <h1>Willkommen zu diesem Passwortgenerator!</h1>
+    <input type="number" name="numberOfPassword" value="8" id="numberOfPassword" min="4" max="30" placeholder="Länge">
+    <label for="numberOfPassword">Geben Sie hier die Länge Ihres zu generierenden Passworts ein.</label><br>
+    <input type="checkbox" id="lowerCase" name="lowerCase" checked>
+    <label for="lowerCase">Kleinbuchstaben</label><br>
+    <input type="checkbox" id="upperCase" name="upperCase" checked>
+    <label for="upperCase">Großbuchstaben</label><br>
+    <input type="checkbox" id="specialCharacters" name="specialCharacters" checked>
+    <label for="specialCharacters">Sonderzeichen</label><br>
+    <input type="checkbox" id="punctuationMarks" name="punctuationMarks" checked>
+    <label for="punctuationMarks">Satzzeichen</label><br>
+    <input type="checkbox" id="numbers" name="numbers" checked>
+    <label for="numbers">Zahlen</label><br>
+    <button id="submitButton" onclick="check()">Generieren!</button>
+    <!--<button id="copyPassword" onclick="copyPassword()">Kopieren</button>-->
+    <div id="showPasswordAndText">
+        <p id="createdPassword" onclick="copyPassword()" title="Passwort kopieren">Kein generiertes Passwort</p>
+        <p id="alternativeText"><br></p>
+    </div>
+    </main>
+    <footer>
+        Copyright © 2022 Passwortgenerator24. All rights reserved. | Projekt der <a href="https://lateinmausgruppe.netlify.app">Lateinmausgruppe</a>
+    </footer>
+</body>
+</html>
