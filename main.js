@@ -4,6 +4,7 @@ const random_numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const random_specialCharacters = ["$", "%", "&", "/", "§", "#", "*", "~"];
 const random_punctuationMark = [".", ",", ";", "!", "?", "(", ")", ":", "-"];
 let createdPassword;
+const userArray = [];
 
 function check () {
     let alternativeParagraph = document.getElementById("alternativeText");
@@ -30,10 +31,8 @@ function checkElements () {
     let numbers = document.getElementById("numbers");
     let specialCharacters = document.getElementById("specialCharacters");
     let punctuationMarks = document.getElementById("punctuationMarks");
-    const userArray = [];
     screenCheckbox(lowerCase, upperCase, numbers, specialCharacters, punctuationMarks, userArray);
-    let numberOfPassword = document.getElementById("numberOfPassword");
-    createPassword(userArray, numberOfPassword);
+    
 }
 
 function screenCheckbox (lowerCase, upperCase, numbers, specialCharacters, punctuationMarks, userArray) {
@@ -57,7 +56,9 @@ function screenCheckbox (lowerCase, upperCase, numbers, specialCharacters, punct
         x.innerHTML = "Bitte wählen Sie, wie Ihr Passwort gestaltet werden soll.";
         x.style.color = "red";
     } else {
-        return userArray;
+        let numberOfPassword = document.getElementById("numberOfPassword");
+        returnUserarray(userArray);
+        createPassword(userArray, numberOfPassword);
     }
 }
 
@@ -65,8 +66,12 @@ function createUserArray (random_x, userArray) {
     let i = 0;
         for (i in random_x) {
             userArray.push(random_x[i]);
-        }
-        return userArray;
+        }   
+    return userArray;
+}
+
+function returnUserarray(array) {
+    return array;
 }
 
 function createPassword (userArray, numberOfPassword) {
