@@ -14,7 +14,7 @@ h1 {
 
 #submitButton {
     background-color: white;
-    color: aqua;
+    color: blue;
     border: 1px solid aqua;
     padding: 10px;
     font-weight: bold;
@@ -23,7 +23,7 @@ h1 {
 }
 
 #submitButton:hover {
-    background-color: aqua;
+    background-color: blue;
     color: white;
     border: 1px solid white;
 }
