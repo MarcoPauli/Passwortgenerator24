@@ -1,120 +1,108 @@
+let submitButton = document.getElementById("submitButton");
+submitButton.addEventListener("click", checkUserSettings);
+
+let passwordLength;
+let createdPassword;
+let msg1 = "Das Passwort muss zwischen 5 und 50 Zeichen lang sein.";
+let msg2 = "Ganze Zahl eingeben!";
+let msg3 = "Ein unbekannter Fehler ist aufgetreten. Bitte erneut versuchen.";
+let msg4 = "Bitte wählen Sie, wie Ihr Passwort gestaltet werden soll.";
+
 const random_lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 const random_upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 const random_numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const random_specialCharacters = ["$", "%", "&", "/", "§", "#", "*", "~"];
 const random_punctuationMark = [".", ",", ";", "!", "?", "(", ")", ":", "-"];
-let createdPassword;
+const random_all = [random_lowerCase, random_upperCase, random_numbers, random_specialCharacters, random_punctuationMark];
 const userArray = [];
 
-function check () {
-    let alternativeParagraph = document.getElementById("alternativeText");
-    let passwordLength = document.getElementById("numberOfPassword");
-    document.getElementById("createdPassword").style.color = "grey";
-    if ((4 <= passwordLength.value && passwordLength.value <= 30) && !(passwordLength.value.includes("." || ","))) {
-        alternativeParagraph.innerHTML = "";
-        checkElements();
-    } else if (passwordLength.value < 4 || passwordLength.value > 30) {
-        alternativeParagraph.innerHTML = "Das Passwort muss zwischen 4 und 30 Zeichen lang sein.";
-        alternativeParagraph.style.color = "red";
-    } else if (passwordLength.value.includes("." || ",") || isNaN(passwordLength.value)) {
-        alternativeParagraph.innerHTML = "Ganze Zahl eingeben!";
-        alternativeParagraph.style.color = "red";
-    } else {
-        alternativeParagraph.innerHTML = "Ein unbekannter Fehler ist aufgetreten. Bitte erneut versuchen.";
-        alternativeParagraph.style.color = "red";
-    }
+function checkUserSettings() {
+    passwordLength = document.getElementById("numberOfPassword");
+    if ((Number(passwordLength.value) > 4 && Number(passwordLength.value) <= 50) && !(passwordLength.value.includes("." || ","))) {
+        notification("", "black");
+        screenCheckbox(passwordLength);
+    } 
+    else if (Number(passwordLength.value) < 5 || Number(passwordLength.value) > 50) notification(msg1, "red");
+    else if (passwordLength.value.includes("." || ",") || isNaN(Number(passwordLength.value))) notification(msg2, "red");
+    else notification(msg3, "red");
 }
 
-function checkElements () {
+function notification(msg, color) {
+    let notificationParagraph = document.getElementById("alternativeText");
+    notificationParagraph.innerHTML = msg;
+    notificationParagraph.style.color = color;
+}
+
+function screenCheckbox(pwLength) {
     let lowerCase = document.getElementById("lowerCase");
     let upperCase = document.getElementById("upperCase");
     let numbers = document.getElementById("numbers");
     let specialCharacters = document.getElementById("specialCharacters");
     let punctuationMarks = document.getElementById("punctuationMarks");
-    screenCheckbox(lowerCase, upperCase, numbers, specialCharacters, punctuationMarks, userArray);
-    
+    const all = [lowerCase, upperCase, numbers, specialCharacters, punctuationMarks];
+    screenSingular(all);
+    if (!(lowerCase.checked || upperCase.checked || numbers.checked || specialCharacters.checked || punctuationMarks.checked)) notification(msg4, "red");
+    else createPassword(pwLength);
 }
 
-function screenCheckbox (lowerCase, upperCase, numbers, specialCharacters, punctuationMarks, userArray) {
-    if (lowerCase.checked) {
-        createUserArray(random_lowerCase, userArray);
-    } 
-    if (upperCase.checked) {
-        createUserArray(random_upperCase, userArray);
-    }
-    if (numbers.checked) {
-        createUserArray(random_numbers, userArray);
-    }
-    if (specialCharacters.checked) {
-        createUserArray(random_specialCharacters, userArray);
-    } 
-    if (punctuationMarks.checked) {
-        createUserArray(random_punctuationMark, userArray);
-    }
-    if (!(lowerCase.checked || upperCase.checked || numbers.checked || specialCharacters.checked || punctuationMarks.checked)) {
-        let x =  document.getElementById("alternativeText");
-        x.innerHTML = "Bitte wählen Sie, wie Ihr Passwort gestaltet werden soll.";
-        x.style.color = "red";
-    } else {
-        let numberOfPassword = document.getElementById("numberOfPassword");
-        returnUserarray(userArray);
-        createPassword(userArray, numberOfPassword);
+function screenSingular(array) {
+    for (let i = 0; i < array.length; i++) {
+        if (array[i].checked) {
+            createUserArray(random_all[i]);
+        }
     }
 }
 
-function createUserArray (random_x, userArray) {
+function createUserArray (random_x) {
     let i = 0;
-        for (i in random_x) {
-            userArray.push(random_x[i]);
-        }   
+    for (i in random_x) {
+        userArray.push(random_x[i]);
+    }   
     return userArray;
 }
 
-function returnUserarray(array) {
-    return array;
-}
-
-function createPassword (userArray, numberOfPassword) {
-    let alternativeParagraph = document.getElementById("alternativeText");
-    password(userArray, numberOfPassword);
-    alert(createdPassword)
+function createPassword (pwLength) {
+    password(pwLength);
     while (createdPassword.includes("undefined") || createdPassword.includes("NaN")) {
-        createdPassword = "";
-        password(createdPassword, userArray, numberOfPassword);
+        password(pwLength);
     }
-    let x = document.getElementById("createdPassword");
-    x.innerHTML = createdPassword;
-    x.style.color = "indigo";
-    checkPassword(alternativeParagraph, createdPassword);
+    let showCreatedPassword = document.getElementById("createdPassword");
+    showCreatedPassword.innerHTML = createdPassword;
+    showCreatedPassword.style.color = "indigo";
+    checkPassword(createdPassword);
+    userArray.splice(0, userArray.length);
+    return userArray;
 }
 
-function password (userArray, numberOfPassword) {
+function password(pwLength) {
     createdPassword = "";
-    for (let i = 0; i < numberOfPassword.value; i++) {
+    for (let i = 0; i < pwLength.value; i++) {
         let random = Math.floor(Math.random() * (userArray.length + 1) );
         createdPassword += userArray[random];
     }
-    alert(createdPassword)
     return createdPassword;
 }
 
-function checkPassword (alternativeParagraph, createdPassword) {
-    if (createdPassword.length < 5) {
-        alternativeParagraph.style.color = "darkred";
-        alternativeParagraph.innerHTML = "Schlechtes Passwort";
-    } else if (createdPassword.length < 8) {
-        alternativeParagraph.style.color = "red";
-        alternativeParagraph.innerHTML = "Schwaches Passwort";
-    } else if (createdPassword.length < 10) {
-        alternativeParagraph.style.color = "yellow";
-        alternativeParagraph.innerHTML = "Mittleres Passwort";
-    } else if (createdPassword.length < 12) {
-        alternativeParagraph.style.color = "green";
-        alternativeParagraph.innerHTML = "Gutes Passwort";
-    } else if (createdPassword.length >= 12) {
-        alternativeParagraph.style.color = "darkgreen";
-        alternativeParagraph.innerHTML = "Sehr gutes Passwort";
+function checkPassword (createdPassword) {
+    createdPassword = createdPassword.length;
+    switch(true) {
+        case createdPassword < 7:
+            notification("Schlechtes Passwort", "darkred");
+            break;
+        case createdPassword < 8:
+            notification("Schwaches Passwort", "red");
+            break;
+        case createdPassword < 12:
+            notification("Mittleres Passwort", "yellow");
+            break;
+        case createdPassword < 14:
+            notification("Gutes Passwort", "green");
+            break;
+        case createdPassword >= 14:
+            notification("Sehr gutes Passwort", "darkgreen");
     }
+    createdPassword = "";
+    return createdPassword;
 }
 
 function copyPassword () {
