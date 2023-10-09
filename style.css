@@ -27,13 +27,6 @@ h1 {
     color: white;
     border: 1px solid white;
 }
-/*
-#showPasswordAndText {
-    margin: 10px;
-    background-color: white;
-    border: none;
-    border-radius: 10px;
-}*/
 
 #copyPassword {
     margin-left: 15px;
@@ -64,7 +57,7 @@ footer {
     padding: 20px;
     background-color: black;
     color: gray;
-    position: relative;
+    position: absolute;
     bottom: 0;
     right: 0;
     left: 0;

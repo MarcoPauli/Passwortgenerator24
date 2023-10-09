@@ -69,7 +69,7 @@ function createPassword (pwLength) {
     let showCreatedPassword = document.getElementById("createdPassword");
     showCreatedPassword.innerHTML = createdPassword;
     showCreatedPassword.style.color = "indigo";
-    checkPassword(createdPassword);
+    checkPassword(createdPassword.length);
     userArray.splice(0, userArray.length);
     return userArray;
 }
@@ -84,7 +84,6 @@ function password(pwLength) {
 }
 
 function checkPassword (createdPassword) {
-    createdPassword = createdPassword.length;
     switch(true) {
         case createdPassword < 7:
             notification("Schlechtes Passwort", "darkred");
@@ -104,6 +103,9 @@ function checkPassword (createdPassword) {
     createdPassword = "";
     return createdPassword;
 }
+
+let copyPasswordEl = document.getElementById("createdPassword");
+copyPasswordEl.addEventListener("click", copyPassword);
 
 function copyPassword () {
     let password = document.getElementById("createdPassword");
