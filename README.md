@@ -1,0 +1,2 @@
+This app creates passwords for you. Make sure that the password you create contains at least one element of each of the sets you selected to create the password. The longer your password is and the more different characters you use, the better your password will be!
+Live demo: https://passwortgenerator24.netlify.app
